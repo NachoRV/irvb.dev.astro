@@ -1,4 +1,4 @@
-// import rss, { pagesGlobToRssItems } from '@astrojs/rss';
+// git import rss, { pagesGlobToRssItems } from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 
 
