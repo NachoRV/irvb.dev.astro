@@ -12,7 +12,8 @@ const postsCollection = defineCollection({
       url: z.string(),
       alt: z.string()
     }),
-    tags: z.array(z.string())
+    tags: z.array(z.string()),
+    draft: z.boolean().optional(),
   })
 });
 // Exporta un solo objeto `collections` con las colecciones registradas
