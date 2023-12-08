@@ -5,7 +5,8 @@ import BlogPost from "../components/BlogPost.astro";
 
 const pageTitle = "irvb.dev blog de programacion";
 // const allPosts = await Astro.glob("../pages/posts/*.md");
-const allPosts = await getCollection("posts");
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+//const allPosts = await getCollection("posts");
 ---
 
 <Layout title={pageTitle}>
