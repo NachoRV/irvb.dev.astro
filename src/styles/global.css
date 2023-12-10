@@ -1,6 +1,6 @@
 html {
   background-color: #f1f5f9;
-  font-family: IBM Plex Mono,sans-serif;
+  font-family: IBMPlexMono,sans-serif;
 }
 
 body {
@@ -113,4 +113,25 @@ html.dark {
 
 .dark .nav-links a {
   color: #fff;
+}
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("/fonts/IBMPlexMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("/fonts/IBMPlexMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("/fonts/IBMPlexMono-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("/fonts/IBMPlexMono-thin.woff2") format("woff2");
+  font-weight: 100;
 }
