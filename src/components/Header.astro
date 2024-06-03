@@ -1,17 +1,178 @@
 ---
-import Navigation from "./Navigation.astro";
-import Hamburger from './Hamburger.astro';
+import { getCollection } from "astro:content";
+import Menu from "./svg/menu.astro";
+import ThemeIcon from "./ThemeIcon.astro";
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
+const navmenu: any[] = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "About",
+    href: "/about",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+  },
+];
 ---
-<header>
-  <nav>
-    <Hamburger />
-    <Navigation />
+
+<header class="header">
+  <a href="/"> <h1>irbv.dev</h1> </a>
+  <nav class="main-nav">
+    {tags.map((tag) => <a href={`/tags/${tag}`}>{tag}</a>)}
+    {
+      navmenu.map((item) => (
+        <a
+          href={item.href}
+          target={item.external ? "_blank" : ""}
+          rel={item.external ? "noopener" : ""}
+        >
+          {item.label}
+        </a>
+      ))
+    }
   </nav>
+  <ThemeIcon />
+  <button id="menu" aria-label="Toggle Menu" class="nav-toggle">
+    <Menu class="menu" />
+  </button>
 </header>
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const menuButton = document.getElementById("menu");
+    menuButton?.addEventListener("click", () => {
+      [...document.querySelectorAll(".main-nav")].forEach((Element) => {
+        console.log(Element.classList.contains("open"));
+        if (Element.classList.contains("open")) {
+          Element.classList.remove("open");
+        } else {
+          Element.classList.add("open");
+        }
+      });
+    });
+  });
+</script>
 
 <style>
-  nav {
-    display: flex;
-    flex-direction: row;
+  #menu {
+    height: 50px;
+    width: 50px;
+    background: none;
+    border: none;
+  }
+
+  .header {
+    align-items: center;
+    background: var(--color-black);
+    color: var(--color-white);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr auto auto;
+    font-size: 0.875rem;
+    overflow: hidden;
+    padding: 1rem;
+    position: relative;
+  }
+
+  .header:after {
+    animation: var(--animation-gradient-shift);
+    background: var(--color-gradient);
+    background-size: 200%;
+    bottom: 0;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  .header a {
+    display: block;
+    line-height: 1;
+    color: inherit; /* Hereda el color del elemento padre */
+    text-decoration: none; /* Elimina cualquier subrayado */
+  }
+
+  .header nav {
+    display: none;
+    grid-column: 1 / 4;
+    order: 4;
+  }
+
+  .header nav.open {
+    display: block;
+  }
+
+  .header nav > a {
+    color: var(--color-white);
+    font-weight: 500;
+    padding: 1rem;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  .logo {
+    max-width: 75px;
+  }
+
+  .logo svg {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .nav-toggle,
+  .aa-OpenButton {
+    justify-self: flex-end;
+  }
+
+  .nav-toggle {
+    background: var(--color-black);
+    border: 1px solid var(--color-white);
+    border-radius: 0.25rem;
+    color: var(--color-white);
+    font-family: var(--font-family);
+    font-size: 0.625rem;
+    padding: 0.375rem 0.5rem;
+  }
+
+  @media (min-width: 760px) {
+    .header {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: space-between;
+      padding-block: 0.25rem;
+    }
+
+    .header nav,
+    .header nav.open {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0 1rem;
+      order: unset;
+    }
+
+    .header nav a {
+      width: auto;
+    }
+
+    .logo {
+      margin-right: auto;
+    }
+
+    .nav-toggle {
+      display: none;
+    }
   }
 </style>

@@ -1,0 +1,60 @@
+---
+interface Props {
+	title: string;
+	body: string;
+	href: string;
+	img: string;
+}
+
+const { href, title, body, img } = Astro.props;
+---
+
+<article class="post-preview">
+	<a href={href}>
+		<div>
+			<img src={img} alt={title} />
+		</div>
+		<div>
+			<h2>{title}</h2>
+			<p>{body}</p>
+		</div>
+	</a>
+	<style>
+		.post-preview {
+			display: flex;
+
+			border: 1px solid #ccc;
+			padding: 20px;
+			margin-bottom: 20px;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		}
+
+		.post-preview a {
+			display: flex;
+			width: 100%;
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.post-preview div:first-child {
+			margin-right: 20px;
+		}
+
+		.post-preview img {
+			width: 100px;
+			height: 100px;
+			object-fit: cover;
+			border-radius: 5px;
+		}
+
+		.post-preview h2 {
+			margin: 0 0 10px;
+			font-size: 20px;
+		}
+
+		.post-preview p {
+			margin: 0;
+		}
+	</style>
+</article>
