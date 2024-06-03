@@ -1,0 +1,78 @@
+---
+let accepted = false;
+
+function acceptCookies() {
+  console.log("Cookies accepted");
+  accepted = true;
+  document.cookie =
+    "cookiesAccepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+}
+---
+
+<div id="cookie-banner" class={accepted ? "hidden" : ""}>
+  <p>
+    Este sitio web utiliza cookies para mejorar tu experiencia de navegación,
+    analizar el tráfico del sitio y personalizar el contenido. Al continuar
+    utilizando este sitio, aceptas nuestro uso de cookies. Para obtener más
+    información, por favor consulta nuestra <a href="/cookies"
+      >Política de Cookies.</a
+    >
+  </p>
+  <button id="btn-cookie">Aceptar</button>
+</div>
+
+<script>
+  const btn = document.getElementById("btn-cookie");
+  btn?.addEventListener("click", () => {
+    acceptCookies();
+  });
+  let accepted = false;
+
+  function acceptCookies() {
+    console.log("Cookies accepted");
+    accepted = true;
+    document.cookie =
+      "cookiesAccepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+    document.getElementById("cookie-banner")?.classList.add("hidden");
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const cookiesAccepted = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("cookiesAccepted="));
+
+    if (cookiesAccepted) {
+      accepted = true;
+      document.getElementById("cookie-banner")?.classList.add("hidden");
+    }
+  });
+</script>
+
+<style>
+  #cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 98vw;
+    background-color: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+  }
+
+  #cookie-banner.p {
+    margin: 0;
+    padding: 0;
+  }
+
+  #cookie-banner.hidden {
+    display: none;
+  }
+
+  #cookie-banner button {
+    margin-left: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+</style>

@@ -1,0 +1,192 @@
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-Light.eot');
+    src: local('Mallory Light'), local('Mallory-Light'),
+        url('Mallory-Light.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-Light.woff2') format('woff2'),
+        url('Mallory-Light.woff') format('woff'),
+        url('Mallory-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mallory XLight';
+    src: url('Mallory-XLight.eot');
+    src: local('Mallory XLight'), local('Mallory-XLight'),
+        url('Mallory-XLight.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-XLight.woff2') format('woff2'),
+        url('Mallory-XLight.woff') format('woff'),
+        url('Mallory-XLight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-MediumItalic.eot');
+    src: local('Mallory Medium Italic'), local('Mallory-MediumItalic'),
+        url('Mallory-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-MediumItalic.woff2') format('woff2'),
+        url('Mallory-MediumItalic.woff') format('woff'),
+        url('Mallory-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Mallory Book';
+    src: url('Mallory-Book.eot');
+    src: local('Mallory Book'), local('Mallory-Book'),
+        url('Mallory-Book.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-Book.woff2') format('woff2'),
+        url('Mallory-Book.woff') format('woff'),
+        url('Mallory-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mallory Book';
+    src: url('Mallory-BookItalic.eot');
+    src: local('Mallory Book Italic'), local('Mallory-BookItalic'),
+        url('Mallory-BookItalic.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-BookItalic.woff2') format('woff2'),
+        url('Mallory-BookItalic.woff') format('woff'),
+        url('Mallory-BookItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-Medium.eot');
+    src: local('Mallory Medium'), local('Mallory-Medium'),
+        url('Mallory-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-Medium.woff2') format('woff2'),
+        url('Mallory-Medium.woff') format('woff'),
+        url('Mallory-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-BoldItalic.eot');
+    src: local('Mallory Bold Italic'), local('Mallory-BoldItalic'),
+        url('Mallory-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-BoldItalic.woff2') format('woff2'),
+        url('Mallory-BoldItalic.woff') format('woff'),
+        url('Mallory-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Mallory Ultra';
+    src: url('Mallory-Ultra.eot');
+    src: local('Mallory Ultra'), local('Mallory-Ultra'),
+        url('Mallory-Ultra.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-Ultra.woff2') format('woff2'),
+        url('Mallory-Ultra.woff') format('woff'),
+        url('Mallory-Ultra.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-ThinItalic.eot');
+    src: local('Mallory Thin Italic'), local('Mallory-ThinItalic'),
+        url('Mallory-ThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-ThinItalic.woff2') format('woff2'),
+        url('Mallory-ThinItalic.woff') format('woff'),
+        url('Mallory-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-LightItalic.eot');
+    src: local('Mallory Light Italic'), local('Mallory-LightItalic'),
+        url('Mallory-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-LightItalic.woff2') format('woff2'),
+        url('Mallory-LightItalic.woff') format('woff'),
+        url('Mallory-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-BlackItalic.eot');
+    src: local('Mallory Black Italic'), local('Mallory-BlackItalic'),
+        url('Mallory-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-BlackItalic.woff2') format('woff2'),
+        url('Mallory-BlackItalic.woff') format('woff'),
+        url('Mallory-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-Bold.eot');
+    src: local('Mallory Bold'), local('Mallory-Bold'),
+        url('Mallory-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-Bold.woff2') format('woff2'),
+        url('Mallory-Bold.woff') format('woff'),
+        url('Mallory-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-Thin.eot');
+    src: local('Mallory Thin'), local('Mallory-Thin'),
+        url('Mallory-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-Thin.woff2') format('woff2'),
+        url('Mallory-Thin.woff') format('woff'),
+        url('Mallory-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mallory XLight';
+    src: url('Mallory-XLightItalic.eot');
+    src: local('Mallory XLight Italic'), local('Mallory-XLightItalic'),
+        url('Mallory-XLightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-XLightItalic.woff2') format('woff2'),
+        url('Mallory-XLightItalic.woff') format('woff'),
+        url('Mallory-XLightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Mallory';
+    src: url('Mallory-Black.eot');
+    src: local('Mallory Black'), local('Mallory-Black'),
+        url('Mallory-Black.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-Black.woff2') format('woff2'),
+        url('Mallory-Black.woff') format('woff'),
+        url('Mallory-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mallory Ultra';
+    src: url('Mallory-UltraItalic.eot');
+    src: local('Mallory Ultra Italic'), local('Mallory-UltraItalic'),
+        url('Mallory-UltraItalic.eot?#iefix') format('embedded-opentype'),
+        url('Mallory-UltraItalic.woff2') format('woff2'),
+        url('Mallory-UltraItalic.woff') format('woff'),
+        url('Mallory-UltraItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+

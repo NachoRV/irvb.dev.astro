@@ -1,34 +1,38 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-import BlogPost from "../components/BlogPost.astro";
+import BaseLayout from "../layouts/Layout.astro";
+import PostCard from "../components/PostCard.astro";
+import Card from "../components/Card.astro";
 
-const pageTitle = "irvb.dev blog de programacion";
-// const allPosts = await Astro.glob("../pages/posts/*.md");
-const allPosts = await getCollection("posts", ({ data }) => !data.draft);
-//const allPosts = await getCollection("posts");
+const pageTitle = "My Astro Learning Blog";
+const allPosts = await getCollection("posts");
 ---
 
-<Layout title={pageTitle}>
-  <h1>About Me</h1>
-  <h2>... and my new Astro site!</h2>
+<BaseLayout title={pageTitle}>
+  <main>
+    <h1>My Astro Learning Blog</h1>
+    <p>This is where I will post about my journey learning Astro.</p>
+    <section>
+      {
+        allPosts.map((post) => (
+          <PostCard
+            img={post.data.image.url}
+            title={post.data.title}
+            href={`/posts/${post.slug}/`}
+            body={post.data.description}
+          />
+        ))
+      }
+    </section>
+  </main>
+</BaseLayout>
 
-  <p>
-    I am working through Astro's introductory tutorial. This is the second page
-    on my website, and it's the first one I built myself!
-  </p>
-
-  <p>
-    This site will update as I complete more of the tutorial, so keep checking
-    back and see how my journey is going!
-  </p>
-
-  <ul>
-    {
-      allPosts.map((post) => (
-        // <BlogPost url={post.url} title={post.frontmatter.title} />
-        <BlogPost url={`/posts/${post.slug}/`} title={post.data.title} />
-      ))
-    }
-  </ul>
-</Layout>
+<style>
+  ul {
+    padding: 0;
+  }
+  li {
+    margin-bottom: 1rem;
+    list-style: none;
+  }
+</style>

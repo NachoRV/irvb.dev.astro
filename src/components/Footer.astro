@@ -1,17 +1,89 @@
 ---
 import Social from "./Social.astro";
+const platform = "github";
+const username = "withastro";
 ---
 
-<footer>
-  <Social platform="twitter" username="astrodotbuild" />
-  <Social platform="github" username="withastro" />
-  <Social platform="youtube" username="astrodotbuild" />
+<footer class="footer">
+  <div class="footer-section-one">
+    <div>
+      <p>
+        <strong>Legal</strong>
+        <ul>
+          <li>
+            <a href="/aviso-legal">Aviso legal</a>
+          </li>
+          <li>
+            <a href="/cookies">Politica de Cookies</a>
+          </li>
+          <li>
+            <a href="/politica-de-privacidad">Politica de provacidad</a>
+          </li>
+        </ul>
+      </p>
+    </div>
+    <div>
+      <p><strong>Contacto</strong></p>
+    </div>
+    <div>
+      <p>
+        <strong> Pago Seguro a través de Amazon </strong>
+      </p>
+      <img
+        src="/img/pago-seguro-amazon-1.webp"
+        alt="pago seguro amazon"
+      />
+      <p>
+        En calidad de Afiliados de Amazon, obtenemos ingresos por las compras
+        adscritas que cumplen los requisitos aplicables
+      </p>
+    </div>
+  </div>
+  <div>
+    Web creada por: <a target="_blank" href="https://irvb.dev"> <strong> irvb.dev </strong></a>
+  </div>
 </footer>
 
 <style>
-  footer {
-    display: flex;
+  .footer {
+    align-items: center;
+    background: var(--color-black);
+    color: var(--color-white);
+    display: grid;
     gap: 1rem;
-    margin-top: 2rem;
+    font-size: 0.875rem;
+    overflow: hidden;
+    padding: 1rem 3rem;
+    position: relative;
+  }
+  div:nth-child(2) {
+    text-align: center;
+  }
+
+  .footer-section-one {
+    align-items: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: auto;
+    font-size: 0.875rem;
+    overflow: hidden;
+    padding: 1rem 3rem;
+  }
+  .footer:after {
+    animation: var(--animation-gradient-shift);
+    background: var(--color-gradient);
+    background-size: 200%;
+    top: 0;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  @media (min-width: 760px) {
+    .footer-section-one {
+      grid-template-columns: 1fr 2fr 1fr;
+    }
   }
 </style>

@@ -18,9 +18,12 @@
 </button>
 
 <script is:inline>
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("astro:page-load", () => {
     const theme = (() => {
-      if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      if (
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem("theme")
+      ) {
         return localStorage.getItem("theme");
       }
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -49,12 +52,11 @@
       .getElementById("themeToggle")
       .addEventListener("click", handleToggleClick);
   });
-  document.addEventListener('astro:after-swap', () => {
-    localStorage.theme === 'dark'
-    ? document.documentElement.classList.add("dark")
-    : document.documentElement.classList.add("light");
+  document.addEventListener("astro:after-swap", () => {
+    localStorage.theme === "dark"
+      ? document.documentElement.classList.add("dark")
+      : document.documentElement.classList.add("light");
   });
-
 </script>
 
 <style>
@@ -63,7 +65,7 @@
     background: none;
   }
   .sun {
-    fill: black;
+    fill: white;
   }
   .moon {
     fill: transparent;
