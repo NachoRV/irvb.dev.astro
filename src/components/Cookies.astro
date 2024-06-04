@@ -22,21 +22,22 @@ function acceptCookies() {
 </div>
 
 <script is:inline>
-  const btn = document.getElementById("btn-cookie");
-  btn?.addEventListener("click", () => {
-    acceptCookies();
+  document.addEventListener("astro:page-load", () => {
+    const btn = document.getElementById("btn-cookie");
+    btn?.addEventListener("click", () => {
+      acceptCookies();
+    });
+    let accepted = false;
+
+    function acceptCookies() {
+      console.log("Cookies accepted");
+      accepted = true;
+      document.cookie =
+        "cookiesAccepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+      document.getElementById("cookie-banner")?.classList.add("hidden");
+    }
   });
-  let accepted = false;
-
-  function acceptCookies() {
-    console.log("Cookies accepted");
-    accepted = true;
-    document.cookie =
-      "cookiesAccepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-    document.getElementById("cookie-banner")?.classList.add("hidden");
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("astro:page-load", function () {
     const cookiesAccepted = document.cookie
       .split("; ")
       .find((row) => row.startsWith("cookiesAccepted="));
