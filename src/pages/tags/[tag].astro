@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/Layout.astro";
 import PostCard from "../../components/PostCard.astro";
+import TagsNav from "../../components/TagsNav.astro";
+import HighlightText from "../../components/HighlightText.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts", ({ data }) => !data.draft);
@@ -11,7 +13,7 @@ export async function getStaticPaths() {
 
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts.filter((post) =>
-      post.data.tags.includes(tag),
+      post.data.tags.includes(tag)
     );
     return {
       params: { tag },
@@ -26,26 +28,13 @@ const { posts, allTags } = Astro.props;
 
 <BaseLayout title={`${tag} - irvb.dev`}>
   <main>
-    <h1 class="text-xl">Artículos con etiqueta: <span class="text-accent">{tag}</span></h1>
-    <p>Mostrando {posts.length} artículo{posts.length !== 1 ? 's' : ''} con la etiqueta <strong>{tag}</strong></p>
-    
-    <nav>
-      <div class="tags">
-        <ul>
-          {
-            allTags.map((t) => (
-              <li class={`tag ${t === tag ? 'active' : ''}`}>
-                <a class={`tag-link ${t === tag ? 'active' : ''}`} href={`/tags/${t}`}>
-                  {t}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      
-      <section class="posts-section">
-        {posts.length > 0 ? (
+    <h1 class="text-xl">
+      Artículos con etiqueta: <HighlightText text={tag} color="blue" />
+    </h1>
+    <TagsNav tags={allTags} activeTag={tag} />
+    <section class="posts-section">
+      {
+        posts.length > 0 ? (
           posts.map((post) => (
             <PostCard
               img={post.data.image.url}
@@ -56,76 +45,19 @@ const { posts, allTags } = Astro.props;
           ))
         ) : (
           <p class="no-posts">No hay artículos con esta etiqueta.</p>
-        )}
-      </section>
-    </nav>
+        )
+      }
+    </section>
+    <style>
+      .posts-section {
+        margin-top: 2rem;
+      }
+      .no-posts {
+        text-align: center;
+        padding: 2rem;
+        color: var(--color-gray);
+        font-style: italic;
+      }
+    </style>
   </main>
-
-  <style>
-    ul {
-      padding: 0;
-    }
-    li {
-      margin-bottom: 1rem;
-      list-style: none;
-    }
-    .tags ul {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      padding: 0;
-      margin: 0;
-      margin-bottom: 2rem;
-    }
-    .tag-link {
-      display: inline-block;
-      padding: 0.40rem 0.75rem;
-      min-width: 100px;
-      text-align: center;
-      text-transform: uppercase;
-      border-radius: 999px;
-      background: linear-gradient(
-        180deg,
-        rgba(var(--accent-light), 0.12),
-        transparent
-      );
-      border: 1px solid var(--color-pink-text);
-      color: var(--color-black);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition:
-        transform 0.12s ease,
-        color 0.12s ease,
-        background 0.12s ease;
-    }
-    .tag-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-    .tag-link:active {
-      transform: translateY(0);
-    }
-    .tag-link.active {
-      background: rgba(var(--accent), 0.2);
-      border-color: var(--color-pink-text);
-      font-weight: bold;
-    }
-    .posts-section {
-      margin-top: 2rem;
-    }
-    .no-posts {
-      text-align: center;
-      padding: 2rem;
-      color: var(--color-gray);
-      font-style: italic;
-    }
-    :root.dark .tag-link {
-      color: var(--color-text-default);
-    }
-    :root.dark .tag-link.active {
-      background: rgba(var(--accent), 0.3);
-    }
-  </style>
 </BaseLayout>

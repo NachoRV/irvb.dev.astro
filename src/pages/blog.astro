@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/Layout.astro";
 import PostCard from "../components/PostCard.astro";
 import Card from "../components/Card.astro";
+import TagsNav from "../components/TagsNav.astro";
 
 const pageTitle = "My Astro Learning Blog";
 
@@ -23,33 +24,19 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
       > not months
     </span>
     <p>This is where I will post about my journey learning Astro.</p>
-    <nav>
-      <div class="tags">
-        <ul>
-          {
-            tags.map((tag) => (
-              <li class="tag">
-                <a class="tag-link" href={`/tags/${tag}`}>
-                  {tag}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <section>
-        {
-          allPosts.map((post) => (
-            <PostCard
-              img={post.data.image.url}
-              title={post.data.title}
-              href={`/posts/${post.slug}/`}
-              body={post.data.description}
-            />
-          ))
-        }
-      </section>
-    </nav>
+    <TagsNav tags={tags} />
+    <section>
+      {
+        allPosts.map((post) => (
+          <PostCard
+            img={post.data.image.url}
+            title={post.data.title}
+            href={`/posts/${post.slug}/`}
+            body={post.data.description}
+          />
+        ))
+      }
+    </section>
   </main>
 
   <style>
@@ -60,63 +47,10 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
       margin-bottom: 1rem;
       list-style: none;
     }
-    .tags ul {
+    section {
       display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      padding: 0;
-      margin: 0;
-      margin-bottom: 2rem;
-    }
-    .tag-link {
-      display: inline-block;
-      padding: 0.4rem 0.75rem;
-      min-width: 100px;
-      text-align: center;
-      text-transform: uppercase;
-      border-radius: 999px;
-      background: linear-gradient(
-        180deg,
-        rgba(var(--accent-light), 0.12),
-        transparent
-      );
-      border: 1px solid var(--color-pink-text);
-      color: var(--color-black);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition:
-        transform 0.12s ease,
-        color 0.12s ease,
-        background 0.12s ease;
-    }
-    .tag-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-    .tag-link:active {
-      transform: translateY(0);
-    }
-    .tag-link.active {
-      background: rgba(var(--accent), 0.2);
-      border-color: var(--color-pink-text);
-      font-weight: bold;
-    }
-    .posts-section {
-      margin-top: 2rem;
-    }
-    .no-posts {
-      text-align: center;
-      padding: 2rem;
-      color: var(--color-gray);
-      font-style: italic;
-    }
-    :root.dark .tag-link {
-      color: var(--color-white);
-    }
-    :root.dark .tag-link.active {
-      background: rgba(var(--accent), 0.3);
+      flex-direction: column;
+      gap: 2rem;
     }
   </style>
 </BaseLayout>
