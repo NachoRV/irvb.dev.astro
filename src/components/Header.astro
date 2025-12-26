@@ -15,7 +15,7 @@ const navmenu: any[] = [
     href: "/about",
   },
   {
-    label: "Blog",
+    label: "Articles",
     href: "/blog",
   },
 ];
@@ -24,7 +24,6 @@ const navmenu: any[] = [
 <header class="header">
   <a href="/"> <h1>irbv.dev</h1> </a>
   <nav class="main-nav">
-    {tags.map((tag) => <a href={`/tags/${tag}`}>{tag}</a>)}
     {
       navmenu.map((item) => (
         <a

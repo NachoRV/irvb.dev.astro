@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = await getCollection('posts');
+const uniqueTags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
+const pageTitle = 'Posts';
+---
+
+<Layout title={pageTitle}>
+	<main class="container">
+		<header>
+			<h1>Posts</h1>
+			<p>Listado de entradas del blog. Filtra por tag para encontrar artículos relacionados.</p>
+		</header>
+
+		<nav class="tags-bar">
+			<button class="tag-btn" data-tag="all">Todos</button>
+			{uniqueTags.map((tag) => (
+				<button class="tag-btn" data-tag={tag}>{tag}</button>
+			))}
+		</nav>
+
+			<section class="posts-list" id="posts">
+				{posts.map((post) => (
+					<div class="post-item" data-tags={post.data.tags.join(',')}>
+						<PostCard
+							href={`/posts/${post.slug}/`}
+							title={post.data.title}
+							body={post.data.description}
+							img={post.data.image.url}
+						/>
+					</div>
+				))}
+			</section>
+
+		<script>
+			// Client-side tag filtering — unobtrusive, works with your PostCard markup
+			document.addEventListener('DOMContentLoaded', () => {
+				const tagButtons = document.querySelectorAll('.tags-bar .tag-btn');
+				const postItems = Array.from(document.querySelectorAll('.post-item')) as HTMLElement[];
+
+				function filterByTag(tag: string) {
+					postItems.forEach((el) => {
+						const tags = el.getAttribute('data-tags') || '';
+						if (tag === 'all' || tags.split(',').map(t => t.trim()).includes(tag)) {
+							el.style.display = '';
+						} else {
+							el.style.display = 'none';
+						}
+					});
+				}
+
+				tagButtons.forEach((btn) => {
+					btn.addEventListener('click', () => {
+						const tag = btn.getAttribute('data-tag') || 'all';
+						// active styles
+						tagButtons.forEach(b => b.classList.remove('active'));
+						btn.classList.add('active');
+						filterByTag(tag);
+					});
+				});
+			});
+		</script>
+
+		<style>
+			.container { padding: 1.25rem; max-width: 900px; margin: 0 auto; }
+			header h1 { margin: 0 0 0.25rem; }
+			.tags-bar { margin: 1rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+			.tag-btn { background: transparent; border: 1px solid rgba(0,0,0,0.08); padding: 0.4rem 0.6rem; border-radius: 6px; cursor: pointer; }
+			.tag-btn.active { background: rgba(var(--accent-light), 0.12); border-color: rgba(var(--accent), 0.2); }
+			.posts-list { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+			@media(min-width: 800px) { .posts-list { grid-template-columns: 1fr 1fr; } }
+		</style>
+	</main>
+</Layout>

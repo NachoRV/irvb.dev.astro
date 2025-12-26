@@ -1,26 +1,121 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import PostCard from "../components/PostCard.astro";
+
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+const recentPosts = allPosts.slice(0, 3);
 ---
 
-<Layout title="Welcome to Astro.">
-	<main></main>
+<Layout title="irvb.dev - Desarrollo Web">
+  <main>
+    <section class="hero">
+      <h1>Bienvenido a irvb.dev</h1>
+      <p>Un blog sobre <span class="highlight">desarrollo web</span>, <span class="highlight">programación</span> y <span class="highlight">tecnología</span></p>
+    </section>
+
+    <section class="recent-posts">
+      <h2>Artículos Recientes</h2>
+      <div class="posts-grid">
+        {
+          recentPosts.map((post) => (
+            <PostCard
+              img={post.data.image.url}
+              title={post.data.title}
+              href={`/posts/${post.slug}/`}
+              body={post.data.description}
+            />
+          ))
+        }
+      </div>
+      <div class="view-all">
+        <a href="/blog" class="btn-primary">Ver todos los artículos</a>
+      </div>
+    </section>
+  </main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
-	}
+  main {
+    margin: auto;
+    padding: 2rem 1rem;
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 2rem 0;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--color-white);
+  }
+
+  .hero p {
+    font-size: 1.3rem;
+    color: var(--color-gray-text);
+    line-height: 1.6;
+  }
+
+  .highlight {
+    color: var(--color-pink);
+    font-weight: 600;
+  }
+
+  .recent-posts {
+    margin-top: 3rem;
+  }
+
+  .recent-posts h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--color-white);
+  }
+
+  .posts-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .view-all {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, var(--color-pink), var(--color-yellow));
+    color: var(--color-black);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(208, 105, 191, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+
+    .recent-posts h2 {
+      font-size: 1.5rem;
+    }
+  }
 </style>
