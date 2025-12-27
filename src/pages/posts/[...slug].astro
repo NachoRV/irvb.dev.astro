@@ -14,7 +14,6 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 // Calcular tiempo de lectura (aprox 200 palabras por minuto)
-const content = await entry.render();
 const wordCount = entry.body.split(/\s+/).length;
 const readingTime = Math.ceil(wordCount / 200);
 ---

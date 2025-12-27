@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Menu from "./svg/menu.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
-const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
 
 const navmenu: any[] = [
   {

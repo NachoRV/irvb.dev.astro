@@ -9,11 +9,10 @@ const { headings } = Astro.props;
 const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
 // Si hay menos de 3 headings, no mostrar TOC
-if (filteredHeadings.length < 3) {
-  export const ASTRO_REMOVED = true;
-}
+const shouldShow = filteredHeadings.length >= 3;
 ---
 
+{shouldShow && (
 <nav class="toc">
   <div class="toc-header">
     <h3>Contenidos</h3>
@@ -116,3 +115,4 @@ if (filteredHeadings.length < 3) {
     }
   }
 </style>
+)}
