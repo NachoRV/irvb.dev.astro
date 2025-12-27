@@ -12,8 +12,6 @@ tags: [DevOps, docker]
 
 # Introducción
 
-<br>
-
 Si este es tu primer contacto con docker te recomiendo que leas mi anterior articulo: _[Docker - Introducción](/blog/docker-introduccion)_,
 en el hacemos un repaso a los principales conceptos de docker.
 
@@ -23,8 +21,6 @@ la nuestra a medida mediante un fichero **dockerfile**.
 En este articulo veremos como construir nuestras propias imágenes y al final te contare como descargarte una del repositorio oficial.
 
 ## ¿Qué es un DockerFile?
-
-<br>
 
 Un Dockerfile es un archivo de texto plano que contiene una serie de instrucciones necesarias para crear una imagen que,
 posteriormente, se convertirá en una sola aplicación utilizada para un determinado propósito.

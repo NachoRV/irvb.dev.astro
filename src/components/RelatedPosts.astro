@@ -1,0 +1,89 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+  currentSlug: string;
+  tags: string[];
+}
+
+const { currentSlug, tags } = Astro.props;
+
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+
+// Encontrar posts relacionados con los mismos tags
+const relatedPosts = allPosts
+  .filter((post) => {
+    // No incluir el post actual
+    if (post.slug === currentSlug) return false;
+    // Incluir si comparte al menos un tag
+    const hasCommonTag = post.data.tags.some((tag) => tags.includes(tag));
+    return hasCommonTag;
+  })
+  .sort((a, b) => {
+    // Ordenar por cantidad de tags en común
+    const aCommon = a.data.tags.filter((tag) => tags.includes(tag)).length;
+    const bCommon = b.data.tags.filter((tag) => tags.includes(tag)).length;
+    return bCommon - aCommon;
+  })
+  .slice(0, 3); // Limitar a 3 posts
+---
+
+{relatedPosts.length > 0 && (
+  <section class="related-posts">
+    <h2>Artículos Relacionados</h2>
+    <div class="related-grid">
+      {relatedPosts.map((post) => (
+        <PostCard
+          img={post.data.image.url}
+          title={post.data.title}
+          href={`/posts/${post.slug}/`}
+          body={post.data.description}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-posts {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 3rem 0;
+    border-top: 2px solid rgba(168, 85, 247, 0.2);
+  }
+
+  .related-posts h2 {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: var(--color-black);
+  }
+
+  :root.dark .related-posts h2 {
+    color: var(--color-white);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .related-posts {
+      margin: 2rem auto;
+      padding: 2rem 0;
+    }
+
+    .related-posts h2 {
+      font-size: 1.35rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

@@ -11,7 +11,6 @@ tags: [css, web]
 
 ## Position
 
-<br>
 La propiedad positions nos ayuda a posicionar un elemento en el documento html y admite los siguientes valores:
 
 - **static**: es el valor por defecto
@@ -24,10 +23,9 @@ Para indicar la posición del elemento con la propiedad position se utilizan las
 - **top**: posicionamiento respecto a la parte superior.
 - **bottom**: posicionamiento respecto a la parte inferior.
 - **left**: posicionamiento respecto a la izquierda.
-- **right**: posicionamiento respecto a la derecha.  
-  <br>
-  Si top y bottom están especificados a la vez top gana sobre bottom y si el conflicto es entre left y right left gana cuando el contenido es ltf (español, ingles...) y raight cuando el contenido es rtl (arabe, persa...)  
-  <br>
+- **right**: posicionamiento respecto a la derecha.
+
+Si top y bottom están especificados a la vez top gana sobre bottom y si el conflicto es entre left y right left gana cuando el contenido es ltf (español, ingles...) y raight cuando el contenido es rtl (arabe, persa...)
 
 Vista la teoría básica veamos unos ejemplos.
 

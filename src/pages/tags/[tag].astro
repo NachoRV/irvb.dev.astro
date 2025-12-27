@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/Layout.astro";
-import BlogPost from "../../components/BlogPost.astro";
+import PostCard from "../../components/PostCard.astro";
+import TagsNav from "../../components/TagsNav.astro";
+import HighlightText from "../../components/HighlightText.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts", ({ data }) => !data.draft);
@@ -11,26 +13,79 @@ export async function getStaticPaths() {
 
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts.filter((post) =>
-      post.data.tags.includes(tag),
+      post.data.tags.includes(tag)
     );
     return {
       params: { tag },
-      props: { posts: filteredPosts },
+      props: { posts: filteredPosts, allTags: uniqueTags },
     };
   });
 }
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
+const { posts, allTags } = Astro.props;
 ---
 
-<BaseLayout title={tag}>
-  <p>Artículos con la etiqueta {tag}</p>
-  <ul>
-    {
-      posts.map((post) => (
-        <BlogPost url={`/posts/${post.slug}/`} title={post.data.title} />
-      ))
-    }
-  </ul>
+<BaseLayout title={`${tag} - irvb.dev`}>
+  <main>
+    <h1>
+      Artículos con etiqueta: <HighlightText text={tag} color="blue" />
+    </h1>
+    <TagsNav tags={allTags} activeTag={tag} />
+    <section class="posts-section">
+      {
+        posts.length > 0 ? (
+          posts.map((post) => (
+            <PostCard
+              img={post.data.image.url}
+              title={post.data.title}
+              href={`/posts/${post.slug}/`}
+              body={post.data.description}
+            />
+          ))
+        ) : (
+          <p class="no-posts">No hay artículos con esta etiqueta.</p>
+        )
+      }
+    </section>
+    <style>
+      main h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 2rem;
+        color: var(--color-black);
+      }
+
+      :root.dark h1 {
+        color: var(--color-white);
+      }
+
+      .posts-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .no-posts {
+        text-align: center;
+        padding: 3rem 2rem;
+        color: var(--color-gray);
+        font-style: italic;
+        grid-column: 1 / -1;
+      }
+
+      @media (max-width: 768px) {
+        main h1 {
+          font-size: 2rem;
+        }
+
+        .posts-section {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+      }
+    </style>
+  </main>
 </BaseLayout>

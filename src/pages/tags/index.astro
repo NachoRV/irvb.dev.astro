@@ -18,21 +18,17 @@ const pageTitle = "Tag Index";
   </div>
 </BaseLayout>
 <style>
-  a {
-    color: #00539f;
+  :root.dark a {
+    color: var(--color-blue);
   }
 
   .tags {
     display: flex;
     flex-wrap: wrap;
   }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.15em;
-    background-color: #f8fcfd;
+  :root.dark .tag {
+    background-color: var(--color-black-faded);
+    border-color: var(--color-gray-medium);
+    color: var(--color-text-default);
   }
 </style>
