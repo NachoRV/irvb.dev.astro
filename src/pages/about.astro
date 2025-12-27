@@ -1,22 +1,455 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/Layout.astro";
-import BlogPost from "../components/BlogPost.astro";
+import HighlightText from "../components/HighlightText.astro";
 
-const pageTitle = "My Astro Learning Blog";
-const allPosts = await getCollection("posts");
+const pageTitle = "Sobre Mí - irvb.dev";
 ---
 
 <BaseLayout title={pageTitle}>
-  <main>
-    <h1>My Astro Learning Blog</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-    <ul>
-      {
-        allPosts.map((post) => (
-          <BlogPost url={`/posts/${post.slug}/`} title={post.data.title} />
-        ))
-      }
-    </ul>
+  <main class="about-page">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>
+          Hola, soy <HighlightText text="Irvb" color="pink" />
+        </h1>
+        <p class="hero-subtitle">
+          Desarrollador web apasionado por crear experiencias digitales hermosas y funcionales.
+          Documentando mi viaje aprendiendo código, negocios y todo lo que hay en el medio.
+        </p>
+      </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="bio">
+      <h2>Mi Historia</h2>
+      <div class="bio-content">
+        <p>
+          Soy un <span class="highlight">desarrollador web</span> y <span class="highlight">emprendedor</span> fascinado por la intersección entre tecnología y negocios. Mi viaje comenzó con curiosidad, se transformó en obsesión, y ahora es mi forma de vida.
+        </p>
+        <p>
+          Actualmente trabajo en proyectos propios mientras documento lo que funciona, lo que falla, y las lecciones que descubro en el camino. Creo en aprender en público y compartir conocimiento de manera honesta.
+        </p>
+        <p>
+          Cuando no estoy codificando, puedo estar pensando en ideas de negocio, leyendo sobre marketing digital, o simplemente disfrutando del café mientras escribo en mi blog.
+        </p>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills">
+      <h2>Habilidades & Tecnologías</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Frontend</h3>
+          <p>React, Astro, TypeScript, Tailwind CSS, CSS avanzado</p>
+        </div>
+        <div class="skill-card">
+          <h3>Backend</h3>
+          <p>Node.js, Express, Bases de datos, APIs REST</p>
+        </div>
+        <div class="skill-card">
+          <h3>Herramientas</h3>
+          <p>Git, Docker, VS Code, Figma, Linux</p>
+        </div>
+        <div class="skill-card">
+          <h3>Otros</h3>
+          <p>SEO, Marketing digital, Escritura técnica</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline">
+      <h2>Mi Recorrido</h2>
+      <div class="timeline-items">
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>Comenzó el viaje</h3>
+            <p class="timeline-date">2021</p>
+            <p>Primeros pasos en desarrollo web con HTML, CSS y JavaScript.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>React & Proyectos</h3>
+            <p class="timeline-date">2022</p>
+            <p>Profundización en React y creación de proyectos reales.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>Blog & Enseñanza</h3>
+            <p class="timeline-date">2023</p>
+            <p>Lanzamiento del blog para documentar y compartir lo aprendido.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>Astro & Actualización</h3>
+            <p class="timeline-date">2024-2025</p>
+            <p>Migrando a Astro y explorando nuevas tecnologías en el ecosistema web moderno.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Currently Working -->
+    <section class="current-work">
+      <h2>Actualmente Trabajando En</h2>
+      <div class="work-item">
+        <h3>Este Blog</h3>
+        <p>Un espacio para documentar mi aprendizaje y compartir conocimiento sobre desarrollo web, emprendimiento y todo lo que descubro en el camino.</p>
+      </div>
+      <div class="work-item">
+        <h3>Proyectos Personales</h3>
+        <p>Experimentando con nuevas tecnologías, ideas de negocio y formas de crear valor en internet.</p>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <h2>¿Quieres conectar?</h2>
+      <p>Me encanta conectar con gente interesada en desarrollo, emprendimiento y aprendizaje continuo.</p>
+      <a href="mailto:contact@irvb.dev" class="cta-button">Envíame un Email</a>
+    </section>
   </main>
+
+  <style>
+    .about-page {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-bottom: 4rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--color-black);
+    }
+
+    :root.dark .hero-content h1 {
+      color: var(--color-white);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: var(--color-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    :root.dark .hero-subtitle {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Bio Section */
+    .bio {
+      margin-bottom: 4rem;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .bio h2,
+    .skills h2,
+    .timeline h2,
+    .current-work h2,
+    .cta h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--color-black);
+      text-align: center;
+    }
+
+    :root.dark .bio h2,
+    :root.dark .skills h2,
+    :root.dark .timeline h2,
+    :root.dark .current-work h2,
+    :root.dark .cta h2 {
+      color: var(--color-white);
+    }
+
+    .bio-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .bio-content p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--color-gray);
+    }
+
+    :root.dark .bio-content p {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .bio-content .highlight {
+      color: rgba(168, 85, 247, 0.9);
+      font-weight: 600;
+    }
+
+    /* Skills Section */
+    .skills {
+      margin-bottom: 4rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-card {
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(224, 204, 250, 0.08), rgba(168, 85, 247, 0.04));
+      border: 1px solid rgba(168, 85, 247, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .skill-card:hover {
+      background: linear-gradient(135deg, rgba(224, 204, 250, 0.12), rgba(168, 85, 247, 0.08));
+      border-color: rgba(168, 85, 247, 0.3);
+      transform: translateY(-2px);
+    }
+
+    :root.dark .skill-card {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(168, 85, 247, 0.03));
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+
+    :root.dark .skill-card:hover {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(168, 85, 247, 0.06));
+      border-color: rgba(168, 85, 247, 0.35);
+    }
+
+    .skill-card h3 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.2rem;
+      color: rgba(168, 85, 247, 0.9);
+    }
+
+    .skill-card p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-gray);
+    }
+
+    :root.dark .skill-card p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Timeline Section */
+    .timeline {
+      margin-bottom: 4rem;
+      width: 100%;
+    }
+
+    .timeline-items {
+      position: relative;
+      padding-left: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .timeline-items::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(168, 85, 247, 0.3), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: -38px;
+      top: 5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(168, 85, 247, 0.9);
+      border: 3px solid var(--color-white);
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+    }
+
+    :root.dark .timeline-marker {
+      border-color: var(--color-black);
+    }
+
+    .timeline-content h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-black);
+    }
+
+    :root.dark .timeline-content h3 {
+      color: var(--color-white);
+    }
+
+    .timeline-date {
+      margin: 0;
+      font-size: 0.9rem;
+      color: rgba(168, 85, 247, 0.8);
+      font-weight: 600;
+    }
+
+    .timeline-content p:last-child {
+      margin: 0.75rem 0 0 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-gray);
+    }
+
+    :root.dark .timeline-content p:last-child {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Currently Working Section */
+    .current-work {
+      margin-bottom: 4rem;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .work-item {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(224, 204, 250, 0.08), rgba(168, 85, 247, 0.04));
+      border-left: 4px solid rgba(168, 85, 247, 0.5);
+    }
+
+    :root.dark .work-item {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(168, 85, 247, 0.03));
+    }
+
+    .work-item h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-black);
+    }
+
+    :root.dark .work-item h3 {
+      color: var(--color-white);
+    }
+
+    .work-item p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-gray);
+    }
+
+    :root.dark .work-item p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* CTA Section */
+    .cta {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(224, 204, 250, 0.1), rgba(168, 85, 247, 0.05));
+      border: 1px solid rgba(168, 85, 247, 0.15);
+      margin-bottom: 2rem;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    :root.dark .cta {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(168, 85, 247, 0.03));
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+
+    .cta p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--color-gray);
+      margin-bottom: 2rem;
+    }
+
+    :root.dark .cta p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.9), rgba(224, 204, 250, 0.7));
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(168, 85, 247, 0.5);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.2);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 1), rgba(224, 204, 250, 0.8));
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .bio h2,
+      .skills h2,
+      .timeline h2,
+      .current-work h2,
+      .cta h2 {
+        font-size: 1.5rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-items {
+        padding-left: 20px;
+      }
+
+      .timeline-marker {
+        left: -28px;
+      }
+    }
+  </style>
 </BaseLayout>

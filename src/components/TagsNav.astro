@@ -13,8 +13,11 @@ const { tags, activeTag } = Astro.props;
     <ul class="tags-list">
       {
         tags.map((tag) => (
-          <li class={`tag-item ${activeTag === tag ? 'active' : ''}`}>
-            <a class={`tag-link ${activeTag === tag ? 'active' : ''}`} href={`/tags/${tag}`}>
+          <li class={`tag-item ${activeTag === tag ? "active" : ""}`}>
+            <a
+              class={`tag-link ${activeTag === tag ? "active" : ""}`}
+              href={`/tags/${tag}`}
+            >
               {tag}
             </a>
           </li>
@@ -39,10 +42,24 @@ const { tags, activeTag } = Astro.props;
     padding: 0;
     margin: 0;
     list-style: none;
+    text-decoration: none;
+  }
+
+  .tags-list li {
+    text-decoration: none;
+    list-style: none;
+  }
+  ul li::before {
+    content: "";
   }
 
   .tag-item {
     margin-bottom: 0;
+    list-style: none;
+  }
+
+  .tag-item:not(:last-child)::after {
+    display: none;
   }
 
   .tag-link {
@@ -61,7 +78,10 @@ const { tags, activeTag } = Astro.props;
     color: var(--color-black);
     text-decoration: none;
     font-size: 0.95rem;
-    transition: transform 0.12s ease, color 0.12s ease, background 0.12s ease;
+    transition:
+      transform 0.12s ease,
+      color 0.12s ease,
+      background 0.12s ease;
   }
 
   .tag-link:hover {

@@ -12,8 +12,6 @@ tags: [DevOps, docker]
 
 # Introducción a Docker y containerización
 
-<br>
-
 ## ¿Qué es containerización?
 
 <br>
@@ -30,8 +28,6 @@ aislar espacios de nombres y usuarios, o compartir recursos de computación.
 
 ## ¿Qué es Docker?
 
-<br>
-
 ![Logo Docker](/img/docker/docker.png)
 
 Docker nace para hacer de la containerización algo sencillo, al alcance de todos. Es decir, Docker toma todos los conceptos existentes de containerización,
@@ -44,8 +40,6 @@ Y el formato que impulsó Docker para definir las imágenes ejecutables y empaqu
 prácticamente todas las tecnologías de containerización actuales.
 
 ## Conceptos básicos de Docker
-
-<br>
 
 Algunos de los conceptos básicos de Docker que debemos manejar son:
 <br>

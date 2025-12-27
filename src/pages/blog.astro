@@ -13,16 +13,7 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 
 <BaseLayout title={pageTitle}>
   <main>
-    <h1 class="text-xl">irvb.dev Blog</h1><span
-      data-br=":r0:"
-      data-brr="1"
-      style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance;"
-      >Learn to code <span class="inline-block decoration-primary relative"
-        ><span class="relative z-10">in weeks,</span><span
-          class="bottom-0 absolute bg-accent-pink h-4 md:h-6 md:-bottom-0.5 -inset-x-2"
-        ></span></span
-      > not months
-    </span>
+    <h1>irvb.dev Blog</h1>
     <p>This is where I will post about my journey learning Astro.</p>
     <TagsNav tags={tags} />
     <section>
@@ -40,17 +31,44 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
   </main>
 
   <style>
-    ul {
-      padding: 0;
-    }
-    li {
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.2;
       margin-bottom: 1rem;
-      list-style: none;
+      color: var(--color-black);
     }
+
+    :root.dark h1 {
+      color: var(--color-white);
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: var(--color-gray);
+    }
+
+    :root.dark p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
     section {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
     }
   </style>
 </BaseLayout>

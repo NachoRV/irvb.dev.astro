@@ -91,7 +91,7 @@ const Header: React.FC<{ navItems: NavItem[] }> = ({ navItems }) => {
   return (
     <header className="header">
       <a href="/">
-        <h1>irbv.dev</h1>
+        <h1 className="site-title">irbv.dev</h1>
       </a>
       <nav className={`main-nav ${isMenuOpen ? "open" : ""}`}>
         {navItems.map((item) => (

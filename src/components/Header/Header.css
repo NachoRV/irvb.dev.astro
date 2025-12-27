@@ -30,6 +30,14 @@
   text-decoration: none;
 }
 
+.site-title {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
 .header nav {
   display: none;
   grid-column: 1 / 4;

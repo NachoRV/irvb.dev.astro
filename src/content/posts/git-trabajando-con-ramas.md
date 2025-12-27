@@ -10,8 +10,6 @@ tags: [git, web]
 
 ---
 
-
-
 Si este es tu primer contacto con git te recomiendo le des un vistazo a este **[post]**
 
 [post]: /posts/git-comandos-basicos

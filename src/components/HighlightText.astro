@@ -1,17 +1,17 @@
 ---
 interface Props {
   text: string;
-  color?: 'pink' | 'purple' | 'blue' | 'yellow' | 'green';
+  color?: "pink" | "purple" | "blue" | "yellow" | "green";
 }
 
-const { text, color = 'pink' } = Astro.props;
+const { text, color = "pink" } = Astro.props;
 
 const colorMap: Record<string, string> = {
-  pink: '#E04CF2',
-  purple: '#A855F7',
-  blue: '#3B82F6',
-  yellow: '#FBBF24',
-  green: '#22C55E',
+  pink: "#E04CF2",
+  purple: "#A855F7",
+  blue: "#3B82F6",
+  yellow: "#FBBF24",
+  green: "#22C55E",
 };
 
 const bgColor = colorMap[color] || colorMap.pink;
@@ -36,16 +36,17 @@ const bgColor = colorMap[color] || colorMap.pink;
 
   .highlight-bg {
     position: absolute;
-    bottom: -1px;
+    bottom: 0px;
     left: -0.5rem;
     right: -0.5rem;
-    height: .75rem;
+    height: 0.75rem;
     opacity: 0.3;
   }
 
   @media (min-width: 768px) {
     .highlight-bg {
-      height: 1rem;
+      height: 1.25rem;
+      bottom: 0.3rem;
     }
   }
 </style>

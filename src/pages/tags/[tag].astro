@@ -28,7 +28,7 @@ const { posts, allTags } = Astro.props;
 
 <BaseLayout title={`${tag} - irvb.dev`}>
   <main>
-    <h1 class="text-xl">
+    <h1>
       Artículos con etiqueta: <HighlightText text={tag} color="blue" />
     </h1>
     <TagsNav tags={allTags} activeTag={tag} />
@@ -49,14 +49,42 @@ const { posts, allTags } = Astro.props;
       }
     </section>
     <style>
+      main h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 2rem;
+        color: var(--color-black);
+      }
+
+      :root.dark h1 {
+        color: var(--color-white);
+      }
+
       .posts-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
         margin-top: 2rem;
       }
+
       .no-posts {
         text-align: center;
-        padding: 2rem;
+        padding: 3rem 2rem;
         color: var(--color-gray);
         font-style: italic;
+        grid-column: 1 / -1;
+      }
+
+      @media (max-width: 768px) {
+        main h1 {
+          font-size: 2rem;
+        }
+
+        .posts-section {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
       }
     </style>
   </main>
