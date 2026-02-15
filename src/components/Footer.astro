@@ -3,72 +3,119 @@ import Social from "./Social.astro";
 ---
 
 <footer class="footer">
-  <div class="footer-section-one">
-    <div>
-      <p class="mb-1.5">
-        <strong>Legal</strong>
-        <ul>
-          <li>
-            <a href="/aviso-legal">Aviso legal</a>
-          </li>
-          <li>
-            <a href="/cookies">Politica de Cookies</a>
-          </li>
-          <li>
-            <a href="/politica-de-privacidad">Politica de provacidad</a>
-          </li>
-        </ul>
-      </p>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">irvb.dev</span>
+        <p class="footer-tagline">blog sobre desarrollo web y tecnología</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Articles</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div>
-      <p><strong>Contacto</strong></p>
+    <div class="footer-bottom">
+      <p>&copy; {new Date().getFullYear()} irvb.dev</p>
     </div>
-  </div>
-  <div>
-    Web creada por: <a target="_blank" href="https://irvb.dev"> <strong> irvb.dev </strong></a>
   </div>
 </footer>
 
 <style>
   .footer {
-    align-items: center;
-    background: var(--color-black);
-    color: var(--color-white);
-    display: grid;
-    gap: 1rem;
-    font-size: 0.875rem;
-    overflow: hidden;
-    padding: 1rem 3rem;
-    position: relative;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    padding: 3rem 1.5rem 1.5rem;
+    margin-top: auto;
   }
-  div:nth-child(2) {
+
+  .footer-inner {
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  @media (min-width: 640px) {
+    .footer-top {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--fg);
+  }
+
+  .footer-tagline {
+    font-size: 0.8125rem;
+    color: var(--fg-subtle);
+    margin: 0;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .footer-col h4 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-subtle);
+    margin: 0 0 0.75rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-col li {
+    margin-bottom: 0.375rem;
+  }
+
+  .footer-col a {
+    font-size: 0.8125rem;
+    color: var(--fg-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--fg);
+  }
+
+  .footer-bottom {
+    padding-top: 1.5rem;
     text-align: center;
   }
 
-  .footer-section-one {
-    align-items: center;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: auto;
-    font-size: 0.875rem;
-    overflow: hidden;
-    padding: 1rem 3rem;
-  }
-  .footer:after {
-    animation: var(--animation-gradient-shift);
-    background: var(--color-gradient);
-    background-size: 200%;
-    top: 0;
-    content: "";
-    height: 1px;
-    left: 0;
-    position: absolute;
-    width: 100%;
-  }
-
-  @media (min-width: 760px) {
-    .footer-section-one {
-      grid-template-columns: 1fr 2fr 1fr;
-    }
+  .footer-bottom p {
+    font-size: 0.75rem;
+    color: var(--fg-subtle);
+    margin: 0;
   }
 </style>

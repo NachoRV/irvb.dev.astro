@@ -13,7 +13,7 @@ const { tags, activeTag } = Astro.props;
     <ul class="tags-list">
       {
         tags.map((tag) => (
-          <li class={`tag-item ${activeTag === tag ? "active" : ""}`}>
+          <li class="tag-item">
             <a
               class={`tag-link ${activeTag === tag ? "active" : ""}`}
               href={`/tags/${tag}`}
@@ -30,8 +30,7 @@ const { tags, activeTag } = Astro.props;
 <style>
   .tags-container {
     display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
+    justify-content: flex-start;
   }
 
   .tags-list {
@@ -42,68 +41,45 @@ const { tags, activeTag } = Astro.props;
     padding: 0;
     margin: 0;
     list-style: none;
-    text-decoration: none;
   }
 
   .tags-list li {
-    text-decoration: none;
     list-style: none;
+    margin: 0;
+    padding: 0;
   }
-  ul li::before {
+
+  .tags-list li::before {
     content: "";
+    display: none;
   }
 
   .tag-item {
     margin-bottom: 0;
-    list-style: none;
-  }
-
-  .tag-item:not(:last-child)::after {
-    display: none;
   }
 
   .tag-link {
     display: inline-block;
-    padding: 0.4rem 0.75rem;
-    min-width: 100px;
-    text-align: center;
-    text-transform: uppercase;
-    border-radius: 999px;
-    background: linear-gradient(
-      180deg,
-      rgba(var(--accent-light), 0.12),
-      transparent
-    );
-    border: 1px solid var(--color-pink-text);
-    color: var(--color-black);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    color: var(--fg-muted);
     text-decoration: none;
-    font-size: 0.95rem;
-    transition:
-      transform 0.12s ease,
-      color 0.12s ease,
-      background 0.12s ease;
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    transition: all 0.15s ease;
   }
 
   .tag-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  }
-
-  .tag-link:active {
-    transform: translateY(0);
+    background: var(--bg-muted);
+    border-color: var(--border-hover);
+    color: var(--fg);
   }
 
   .tag-link.active {
-    background: rgba(var(--accent), 0.2);
-    border-color: var(--color-pink-text);
-    font-weight: bold;
-  }
-
-  :root.dark .tag-link {
-    color: var(--color-white);
-  }
-
-  :root.dark .tag-link.active {
-    background: rgba(var(--accent), 0.3);
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--bg);
   }
 </style>
