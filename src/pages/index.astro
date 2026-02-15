@@ -5,7 +5,7 @@ import PostCard from "../components/PostCard.astro";
 import HighlightText from "../components/HighlightText.astro";
 
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
-const recentPosts = allPosts.slice(0, 3);
+const recentPosts = allPosts.slice(0, 6);
 ---
 
 <Layout title="irvb.dev - Desarrollo Web">
@@ -88,8 +88,15 @@ const recentPosts = allPosts.slice(0, 3);
 
         .posts-grid {
           display: grid;
+          grid-template-columns: repeat(2, 1fr);
           gap: 2rem;
           margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .posts-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         .view-all {
