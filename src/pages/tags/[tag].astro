@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/Layout.astro";
 import PostCard from "../../components/PostCard.astro";
 import TagsNav from "../../components/TagsNav.astro";
-import HighlightText from "../../components/HighlightText.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts", ({ data }) => !data.draft);
@@ -28,62 +27,79 @@ const { posts, allTags } = Astro.props;
 
 <BaseLayout title={`${tag} - irvb.dev`}>
   <main>
-    <h1>
-      Artículos con etiqueta: <HighlightText text={tag} color="blue" />
-    </h1>
-    <TagsNav tags={allTags} activeTag={tag} />
-    <section class="posts-section">
-      {
-        posts.length > 0 ? (
-          posts.map((post) => (
-            <PostCard
-              img={post.data.image.url}
-              title={post.data.title}
-              href={`/posts/${post.slug}/`}
-              body={post.data.description}
-            />
-          ))
-        ) : (
-          <p class="no-posts">No hay artículos con esta etiqueta.</p>
-        )
-      }
-    </section>
+    <div class="page-container">
+      <header class="page-header">
+        <h1>#{tag}</h1>
+        <p>{posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}</p>
+      </header>
+      <TagsNav tags={allTags} activeTag={tag} />
+      <section class="posts-grid">
+        {
+          posts.length > 0 ? (
+            posts.map((post) => (
+              <PostCard
+                img={post.data.image.url}
+                title={post.data.title}
+                href={`/posts/${post.slug}/`}
+                body={post.data.description}
+              />
+            ))
+          ) : (
+            <p class="no-posts">No hay artículos con esta etiqueta.</p>
+          )
+        }
+      </section>
+    </div>
     <style>
-      main h1 {
-        font-size: 3.5rem;
-        font-weight: 700;
-        line-height: 1.2;
+      .page-container {
+        width: 100%;
+        max-width: 64rem;
+      }
+
+      .page-header {
+        padding-bottom: 2rem;
         margin-bottom: 2rem;
-        color: var(--color-black);
+        border-bottom: 1px solid var(--border);
       }
 
-      :root.dark h1 {
-        color: var(--color-white);
+      h1 {
+        font-size: clamp(1.875rem, 4vw, 2.5rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin-bottom: 0.5rem;
+        color: var(--fg);
+        font-family: var(--font-mono);
       }
 
-      .posts-section {
+      .page-header p {
+        font-size: 0.875rem;
+        color: var(--fg-subtle);
+        margin: 0;
+      }
+
+      .posts-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
         margin-top: 2rem;
       }
 
       .no-posts {
         text-align: center;
         padding: 3rem 2rem;
-        color: var(--color-gray);
+        color: var(--fg-subtle);
         font-style: italic;
         grid-column: 1 / -1;
       }
 
       @media (max-width: 768px) {
-        main h1 {
-          font-size: 2rem;
+        h1 {
+          font-size: 1.75rem;
         }
 
-        .posts-section {
+        .posts-grid {
           grid-template-columns: 1fr;
-          gap: 1.5rem;
+          gap: 1.25rem;
         }
       }
     </style>

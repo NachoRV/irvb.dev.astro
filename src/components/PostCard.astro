@@ -11,32 +11,25 @@ const { href, title, body, img } = Astro.props;
 
 <article class="post-card">
 	<a href={href} class="post-link">
-		<div class="image-container">
-			<img src={img} alt={title} class="post-image" />
-			<div class="image-overlay"></div>
-		</div>
+		
 		<div class="content">
 			<h2 class="title">{title}</h2>
 			<p class="description">{body}</p>
-			<div class="read-more">Leer más →</div>
+			<span class="read-more">Leer artículo &rarr;</span>
 		</div>
 	</a>
 
 	<style>
 		.post-card {
-			border-radius: 12px;
+			border-radius: 8px;
 			overflow: hidden;
-			background: linear-gradient(135deg, rgba(224, 204, 250, 0.08), rgba(168, 85, 247, 0.04));
-			border: 1px solid rgba(168, 85, 247, 0.15);
-			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-			height: 100%;
+			background: var(--bg-elevated);
+			border: 1px solid var(--border);
+			transition: all 0.2s ease;
 		}
 
 		.post-card:hover {
-			border-color: rgba(168, 85, 247, 0.3);
-			background: linear-gradient(135deg, rgba(224, 204, 250, 0.12), rgba(168, 85, 247, 0.08));
-			box-shadow: 0 20px 40px rgba(168, 85, 247, 0.1);
-			transform: translateY(-4px);
+			border-color: var(--border-hover);
 		}
 
 		.post-link {
@@ -47,105 +40,54 @@ const { href, title, body, img } = Astro.props;
 			color: inherit;
 		}
 
-		.image-container {
-			position: relative;
-			overflow: hidden;
-			aspect-ratio: 16 / 9;
-			background: linear-gradient(135deg, #f5e6ff, #e8d5ff);
-		}
-
-		.post-image {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-		}
-
-		.post-card:hover .post-image {
-			transform: scale(1.05);
-		}
-
-		.image-overlay {
-			position: absolute;
-			inset: 0;
-			background: linear-gradient(135deg, rgba(168, 85, 247, 0) 0%, rgba(168, 85, 247, 0.1) 100%);
-			transition: background 0.3s ease;
-		}
-
-		.post-card:hover .image-overlay {
-			background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(168, 85, 247, 0.15) 100%);
-		}
 
 		.content {
 			flex: 1;
 			display: flex;
 			flex-direction: column;
-			padding: 24px;
+			padding: 1.25rem;
 		}
 
 		.title {
-			margin: 0 0 12px 0;
-			font-size: 1.25rem;
+			margin: 0 0 0.5rem 0;
+			font-size: 1.125rem;
 			font-weight: 600;
 			line-height: 1.4;
-			color: var(--color-black);
-			transition: color 0.3s ease;
-		}
-
-		:root.dark .title {
-			color: var(--color-white);
-		}
-
-		.post-card:hover .title {
-			color: rgba(168, 85, 247, 0.9);
+			color: var(--fg);
+			letter-spacing: -0.01em;
 		}
 
 		.description {
-			margin: 0 0 16px 0;
-			font-size: 0.95rem;
+			margin: 0 0 1rem 0;
+			font-size: 0.875rem;
 			line-height: 1.6;
-			color: var(--color-gray);
+			color: var(--fg-muted);
 			flex: 1;
 		}
 
-		:root.dark .description {
-			color: rgba(255, 255, 255, 0.7);
-		}
-
 		.read-more {
-			font-size: 0.9rem;
+			font-size: 0.8125rem;
 			font-weight: 500;
-			color: rgba(168, 85, 247, 0.8);
-			transition: all 0.3s ease;
+			color: var(--fg-subtle);
+			font-family: var(--font-mono);
+			transition: color 0.15s ease;
 		}
 
 		.post-card:hover .read-more {
-			color: rgba(168, 85, 247, 1);
-			transform: translateX(4px);
-		}
-
-		:root.dark .post-card {
-			background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(168, 85, 247, 0.03));
-			border-color: rgba(168, 85, 247, 0.2);
-		}
-
-		:root.dark .post-card:hover {
-			background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(168, 85, 247, 0.06));
-			border-color: rgba(168, 85, 247, 0.35);
-			box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
+			color: var(--fg);
 		}
 
 		@media (max-width: 768px) {
 			.content {
-				padding: 16px;
+				padding: 1rem;
 			}
 
 			.title {
-				font-size: 1.1rem;
+				font-size: 1rem;
 			}
 
 			.description {
-				font-size: 0.9rem;
+				font-size: 0.8125rem;
 			}
 		}
 	</style>
