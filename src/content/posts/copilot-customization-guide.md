@@ -90,10 +90,7 @@ applyTo: "**/*.ts"                  # Opcional, auto-adjuntar para archivos que 
 
 
 | Modo                | Activación                  | Caso de uso                           |
-|---------------------|----------------------------|---------------------------------------|
-| On-demand (description) | El agente detecta relevancia | Tareas: migraciones, refactoring, API |
-| Explícito (applyTo) | Archivos que coincidan con el glob | Archivos: estándares por lenguaje/framework |
-| Manual              | Add Context → Instructions  | Adjuntar manualmente                  |
+|---------------------|----------------------------|--------------------------------------|
 | **On-demand** (`description`) | El agente detecta relevancia | Tareas: migraciones, refactoring, API |
 | **Explícito** (`applyTo`) | Archivos que coincidan con el glob | Archivos: estándares por lenguaje/framework |
 | **Manual** | `Add Context` → `Instructions` | Adjuntar manualmente |
