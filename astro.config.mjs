@@ -12,9 +12,5 @@ export default defineConfig({
   // adapter: cloudflare(),
   vite: {
     plugins: [tailwindcss()],
-    // Configuración mejorada para desarrollo
-    optimizeDeps: {
-      include: ["astro-navbar"],
-    },
   },
 });

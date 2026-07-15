@@ -1,20 +1,20 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("posts");
   return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 // Calcular tiempo de lectura (aprox 200 palabras por minuto)
-const wordCount = entry.body.split(/\s+/).length;
+const wordCount = (entry.body ?? "").split(/\s+/).length;
 const readingTime = Math.ceil(wordCount / 200);
 ---
 
@@ -59,8 +59,8 @@ const readingTime = Math.ceil(wordCount / 200);
     <footer class="post-footer">
       <hr />
       <p class="post-footer-text">
-        ¿Te gustó este artículo? Comparte tus pensamientos en
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a> o
+        ¿Te gustó este artículo? Comparte tus pensamientos en{" "}
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a> o{" "}
         <a href="mailto:contact@irvb.dev">contáctame por email</a>.
       </p>
       <a href="/blog" class="back-link">&larr; Volver a artículos</a>

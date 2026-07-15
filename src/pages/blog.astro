@@ -25,7 +25,7 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
             <PostCard
               img={post.data.image.url}
               title={post.data.title}
-              href={`/posts/${post.slug}/`}
+              href={`/posts/${post.id}/`}
               body={post.data.description}
             />
           ))

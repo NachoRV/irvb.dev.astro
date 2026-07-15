@@ -40,7 +40,7 @@ const { posts, allTags } = Astro.props;
               <PostCard
                 img={post.data.image.url}
                 title={post.data.title}
-                href={`/posts/${post.slug}/`}
+                href={`/posts/${post.id}/`}
                 body={post.data.description}
               />
             ))

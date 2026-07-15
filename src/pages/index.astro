@@ -32,7 +32,7 @@ const recentPosts = allPosts.slice(0, 6);
               <PostCard
                 img={post.data.image.url}
                 title={post.data.title}
-                href={`/posts/${post.slug}/`}
+                href={`/posts/${post.id}/`}
                 body={post.data.description}
               />
             ))
