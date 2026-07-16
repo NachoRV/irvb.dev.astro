@@ -1,0 +1,260 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface Props {
+  navItems: NavItem[];
+}
+
+const { navItems } = Astro.props;
+---
+
+<header class="header">
+  <a href="/">
+    <h1 class="site-title">irvb.dev</h1>
+  </a>
+  <nav id="main-nav" class="main-nav">
+    {
+      navItems.map((item) => (
+        <a
+          href={item.href}
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noopener noreferrer" : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+  <div class="header-right">
+    <button id="themeToggle" aria-label="Toggle theme">
+      <svg
+        class="icon-moon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg
+        class="icon-sun"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+    <button
+      id="menu"
+      class="nav-toggle"
+      aria-label="Toggle Menu"
+      aria-expanded="false"
+      aria-controls="main-nav"
+    >
+      <svg class="menu" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"
+          fill="currentColor"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById("menu");
+  const nav = document.getElementById("main-nav");
+
+  menuBtn?.addEventListener("click", () => {
+    const isOpen = nav?.classList.toggle("open") ?? false;
+    menuBtn.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  document.getElementById("themeToggle")?.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    height: 3.5rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header a {
+    display: block;
+    line-height: 1;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .site-title {
+    margin: 0;
+    padding: 0;
+    color: var(--fg);
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header nav {
+    display: none;
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0;
+    z-index: 40;
+  }
+
+  .header nav.open {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header nav > a {
+    color: var(--fg-muted);
+    font-weight: 400;
+    font-size: 0.875rem;
+    padding: 0.625rem 1.5rem;
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .header nav > a:hover {
+    color: var(--fg);
+    background: var(--bg-subtle);
+  }
+
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    width: 2rem;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--fg-muted);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.15s ease;
+  }
+
+  .nav-toggle:hover {
+    color: var(--fg);
+    border-color: var(--border-hover);
+  }
+
+  #themeToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--fg-muted);
+    cursor: pointer;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    transition: all 0.15s ease;
+  }
+
+  #themeToggle:hover {
+    color: var(--fg);
+    border-color: var(--border-hover);
+  }
+
+  #themeToggle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* En claro se muestra la luna (ir a oscuro); en oscuro, el sol */
+  .icon-sun {
+    display: none;
+  }
+
+  :global(html.dark) #themeToggle .icon-moon {
+    display: none;
+  }
+
+  :global(html.dark) #themeToggle .icon-sun {
+    display: block;
+  }
+
+  .nav-toggle .menu {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+
+  @media (min-width: 760px) {
+    .header {
+      padding: 0 2rem;
+    }
+
+    .header nav,
+    .header nav.open {
+      position: static;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+      border: none;
+      padding: 0;
+      background: none;
+    }
+
+    .header nav > a {
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+  }
+</style>
