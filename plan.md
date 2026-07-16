@@ -22,11 +22,11 @@ Revisión completa del repo (2026-07-15). Orden de ejecución por prioridad.
 - [x] Enlace del banner corregido: `/cookies` (404) → `/politica-de-privacidad`.
 - [x] ID de GA definido en un único sitio (frontmatter de `Cookies.astro`, pasado al script vía `data-ga-id`).
 
-## 4. Eliminar React + fix FOUC de tema
-- [ ] Reescribir `Header` como componente `.astro` con `<script>` vanilla (toggle menú móvil + toggle tema).
-- [ ] Script inline `is:inline` en el `<head>` de `Layout.astro` que aplique la clase `.dark` desde `localStorage` antes del primer paint (elimina el flash de tema).
-- [ ] Quitar dependencias: `react`, `react-dom`, `@astrojs/react`, `@types/react`, `@types/react-dom`; limpiar `astro.config.mjs` y `tsconfig.json` (`jsx`, `jsxImportSource`).
-- [ ] `aria-expanded` en el botón del menú móvil.
+## 4. Eliminar React + fix FOUC de tema ✅
+- [x] Reescrito `Header` como `src/components/Header.astro` con `<script>` vanilla (toggle menú móvil + toggle tema); borrado `src/components/Header/` (Header.tsx + Header.css, CSS portado a estilos scoped). Los dos iconos de tema se renderizan y se alternan por CSS según `html.dark`.
+- [x] Script inline `is:inline` en el `<head>` de `Layout.astro` que aplica `.dark` desde `localStorage` (o `prefers-color-scheme`) antes del primer paint — elimina el flash de tema.
+- [x] Quitadas dependencias `react`, `react-dom`, `@astrojs/react`, `@types/react`, `@types/react-dom`; limpiados `astro.config.mjs` (integración react) y `tsconfig.json` (opciones jsx). Resultado: `dist/_astro` sin ningún bundle JS.
+- [x] `aria-expanded` + `aria-controls` en el botón del menú móvil.
 
 ## 5. SEO: sitemap + RSS + meta por página
 - [ ] `pnpm astro add sitemap` (`@astrojs/sitemap`).
@@ -36,7 +36,8 @@ Revisión completa del repo (2026-07-15). Orden de ejecución por prioridad.
 - [ ] Arreglar favicon: `type="image/svg+xml"` apunta a `/favicon.ico`; usar `favicon.svg`.
 
 ## 6. Seguridad / housekeeping
-- [ ] `public/_headers` (Cloudflare Pages) con `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` y CSP básica.
+- [ ] Headers de seguridad (`X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, CSP básica) — el hosting es **Vercel**, así que van en `vercel.json` (no `public/_headers`).
+- [x] `engines.node >= 22.12.0` en `package.json` — Vercel compilaba con Node 20 y Astro 7 requiere ≥22.12 (fallo de despliegue del 2026-07-16).
 - [ ] `.github/dependabot.yml` para npm y github-actions.
 - [ ] Revisar licencia de las fuentes Mallory (comerciales, Frere-Jones) en `public/font/` — no se usan en `global.css`; eliminarlas junto con el `demo.html` del vendedor.
 - [ ] Añadir `.claude/settings.local.json` a `.gitignore`.
