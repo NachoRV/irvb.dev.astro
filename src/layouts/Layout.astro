@@ -41,14 +41,8 @@ const navItems = [
   <body>
     <Header navItems={navItems} client:load />
     <slot />
+    <!-- Cookies gestiona el consentimiento y carga Google Analytics solo si se acepta -->
     <Cookies />
     <Footer />
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ1N9ZMLLR"
-    ></script>
-    <script>
-      import "../scripts/google.js";
-    </script>
   </body>
 </html>
