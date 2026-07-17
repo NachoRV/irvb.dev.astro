@@ -35,14 +35,15 @@ Revisión completa del repo (2026-07-15). Orden de ejecución por prioridad.
 - [x] `Layout.astro`: props `description` (con fallback), `image` y `type`; canonical URL, Open Graph completo (`og:site_name`, `og:locale es_ES`) y Twitter cards. Los posts pasan description/imagen del frontmatter y `type="article"`; blog y tags pasan descriptions propias.
 - [x] Favicon corregido: `favicon.svg` como icono SVG + `favicon.ico` de fallback.
 
-## 6. Seguridad / housekeeping
-- [ ] Headers de seguridad (`X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, CSP básica) — el hosting es **Vercel**, así que van en `vercel.json` (no `public/_headers`).
+## 6. Seguridad / housekeeping ✅
+- [x] Headers de seguridad en `vercel.json` (hosting Vercel): `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options: DENY` y CSP básica (permite inline scripts propios y googletagmanager/analytics; imágenes `https:` porque los posts usan Unsplash).
 - [x] `engines.node >= 22.12.0` en `package.json` — Vercel compilaba con Node 20 y Astro 7 requiere ≥22.12 (fallo de despliegue del 2026-07-16).
-- [ ] `.github/dependabot.yml` para npm y github-actions.
-- [ ] Revisar licencia de las fuentes Mallory (comerciales, Frere-Jones) en `public/font/` — no se usan en `global.css`; eliminarlas junto con el `demo.html` del vendedor.
-- [ ] Añadir `.claude/settings.local.json` a `.gitignore`.
-- [ ] Mover `typescript`, `@astrojs/check`, `@types/*` a `devDependencies`; quitar `@astrojs/cloudflare` (sin usar); renombrar `name: "greyhound"` → `irvb.dev`.
-- [ ] Husky: añadir hook `pre-commit` (lint) o eliminar el paquete.
+- [x] `.github/dependabot.yml` para npm (minor/patch agrupados) y github-actions, semanal.
+- [x] Eliminadas las fuentes de `public/font/` (6,9 MB): Mallory es comercial (Frere-Jones), incluía el `demo.html` del vendedor y `global.css` solo usa fuentes de sistema — no se usaban.
+- [x] `.claude/settings.local.json` añadido a `.gitignore` (no estaba trackeado).
+- [x] `typescript` y `@astrojs/check` movidos a `devDependencies` (typescript fijado en la serie 5.x — `pnpm add` trajo TS 7 y se revirtió); quitado `@astrojs/cloudflare` (sin usar); `name` renombrado a `irvb.dev` + `"private": true`.
+- [x] Husky: no estaba ni trackeado ni en `package.json` (solo scaffolding local en `.husky/_`) — borrado el directorio local. Si algún día se quiere pre-commit, instalar husky de cero.
+- [x] Actualizado `CLAUDE.md` (comandos, stack sin React, helper de posts, tema/cookies, Vercel).
 
 ## 7. Imágenes y detalles finales
 - [ ] Migrar imágenes de posts a `src/assets/` + `astro:assets` (`<Image>`): optimización, `width/height` (evita CLS), `loading="lazy"`.
