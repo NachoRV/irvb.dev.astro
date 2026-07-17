@@ -1,6 +1,8 @@
 # Plan de mejoras — irvb.dev
 
-Revisión completa del repo (2026-07-15). Orden de ejecución por prioridad.
+## Fase 1 — Revisión técnica (2026-07-15) ✅ COMPLETADA
+
+Revisión completa del repo. Orden de ejecución por prioridad.
 
 ## 1. Fix drafts + helper compartido de posts ✅
 - [x] Crear `src/utils/posts.ts` con `getPublishedPosts()`: `getCollection("posts", ({ data }) => !data.draft)` + sort por `pubDate` descendente.
@@ -52,3 +54,37 @@ Revisión completa del repo (2026-07-15). Orden de ejecución por prioridad.
 - [x] Footer de post: eliminado el enlace placeholder a `https://twitter.com` (apuntaba a la home genérica); queda el contacto por email. **Pendiente del autor:** re-añadir enlace social con el perfil real si se quiere.
 - [x] Tiempo de lectura: excluidos los bloques de código del conteo (mínimo 1 min).
 - [x] Actualizadas las secciones afectadas de `CLAUDE.md`.
+
+---
+
+## Fase 2 — De blog técnico a blog personal multi-tema (2026-07-17)
+
+**Objetivo:** convertir irvb.dev en un volcado personal de cualquier tema (IA, programación, fotografía, running, nutrición, perros, opinión…) sin perder su función de captación de negocio. **Principio rector:** una sola colección de contenido; lo que cambia es la presentación según quién llega. El visitante de negocio entra por una URL profesional y se auto-selecciona; lo personal humaniza pero nunca está en el camino obligatorio hacia la venta.
+
+### 2.1 Modelo de contenido
+- [ ] Añadir `category` al schema de `src/content.config.ts` como **enum cerrado** (empezar con 4-5 reales: p. ej. `tech`, `ia`, `opinion` + las que ya tengan contenido; regla: no crear categoría nueva hasta tener ~3 posts del tema). Una categoría por post; los tags siguen siendo libres y transversales.
+- [ ] Hacer `image` **opcional** con imagen por defecto por categoría (assets locales en `src/assets/`) — el hero obligatorio es fricción que mata posts cortos de opinión.
+- [ ] `author` con valor por defecto en el schema.
+- [ ] Asignar `category` a los 7 posts existentes (todos `tech`) **sin mover ficheros ni tocar slugs** (ojo: el `generateId` custom incluye subcarpetas en la URL — los posts existentes deben quedarse donde están).
+
+### 2.2 Navegación y rutas
+- [ ] Ruta `/categoria/[cat]` (mismo patrón que `/tags/[tag]`) + página índice de categorías.
+- [ ] Badge de categoría con color propio en `PostCard` y en la cabecera del post (usar variables del tema, no colores hardcodeados).
+- [ ] Filtro por categoría en `/blog` reutilizando el patrón de `TagsNav`.
+- [ ] **Hub profesional `/dev`**: agrupa `tech` + `ia` con intro orientada a negocio. Esta es la URL que se enlaza desde las webs del negocio, LinkedIn y firma de email — no la home.
+- [ ] Rehacer `/about` en dos capas: primero perfil profesional con CTA claro al negocio, después la persona completa (aficiones, por qué escribe de todo).
+- [ ] La home sigue siendo el volcado completo (lo último de todo, con badges).
+
+### 2.3 Captación de negocio
+- [ ] CTA del footer de post **condicionado a la categoría**: `tech`/`ia` → CTA de negocio ("Ayudo a empresas a construir X — hablemos" + enlace a la web comercial); resto → CTA blando (newsletter/redes). Necesito del autor: URL de la web del negocio y texto del CTA.
+- [ ] Resucitar `NewsletterCTA` (está en git history) cuando se elija proveedor de newsletter — es el mejor activo de captación a largo plazo. Decisión pendiente del autor: proveedor (Buttondown, Mailchimp, Substack…).
+- [ ] **RSS por categoría** (`/rss/[category].xml`) manteniendo el feed general — permite embeber "últimos artículos técnicos" en las webs del negocio sin mezclar lo personal.
+- [ ] Añadir enlaces a redes sociales reales en el footer del sitio (pendiente del autor: perfiles).
+
+### 2.4 SEO y detalles
+- [ ] Description propia por página de categoría; OG image por defecto según categoría.
+- [ ] El sitemap cubre las rutas nuevas automáticamente (verificar tras implementar).
+- [ ] Revisar que la CSP de `vercel.json` cubra cualquier origen nuevo (proveedor de newsletter, embeds).
+- [ ] Actualizar `CLAUDE.md` con el modelo de categorías cuando esté implementado.
+
+**Orden sugerido:** 2.1 (schema) → 2.2 (rutas y navegación) → 2.3 (captación) → 2.4 (remate). 2.1 y 2.2 no necesitan decisiones externas; 2.3 requiere input del autor (web de negocio, proveedor de newsletter, redes).
