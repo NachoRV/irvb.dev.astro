@@ -6,6 +6,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is `irvb.dev` — a personal blog built with Astro, deployed on **Vercel**. It's a bilingual (Spanish/English) blog about web development, programming, and technology; content is written primarily in Spanish, and user-facing copy should be in Spanish.
 
+## Workflow (mandatory)
+
+**Never work directly on `main`.** Every change follows this cycle:
+
+1. Create a branch named by type: `feature/<name>` (new functionality), `fix/<name>` (bug fixes), `core/<name>` (tooling, refactors, docs, infra).
+2. Implement and commit on that branch.
+3. Launch the site locally (`pnpm dev`) and show the result to the author for review.
+4. Only after the author's explicit OK: merge the branch into `main` and push to origin.
+
+No commits to `main` and no pushes without the author's review — this applies to every change, including small ones.
+
 ## Commands
 
 Package manager is **pnpm** (`packageManager` field pins the version). Ignore the npm-based instructions in `README.md` — they're leftovers from the Astro starter template.
