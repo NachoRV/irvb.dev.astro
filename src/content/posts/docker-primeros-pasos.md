@@ -38,7 +38,7 @@ RUN apt-get -qqy install git
 
 ## Imágenes a medida con Dockerfile
 
-![Dokerfile imagen](/img/docker/Dockerfile.png)
+![Dokerfile imagen](../../assets/img/docker/Dockerfile.png)
 
 Docker puede construir imágenes automáticamente, leyendo las instrucciones indicadas en un fichero Dockerfile.
 Los pasos principales para crear una imagen a partir de un fichero Dockerfile son:

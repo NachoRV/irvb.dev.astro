@@ -31,9 +31,7 @@ Vista la teoría básica veamos unos ejemplos.
 
 **Static**: como hemos dicho esta es la propiedad por defecto por lo tanto no hay que indicar nada en el css el resultado seria el siguiente.
 
-<div class="img-entrada">
-  <img class="img-entrada" src="/img/css/css-position-one.png ">
-</div>
+![Ejemplo de position static](../../assets/img/css/css-position-one.png)
 
 **Relative**: hemos añadido al cuadrado azul la clase position con los valores que ves a continuación y cómo ves en el resultado el cuadrado se desplaza desde su posición original sin liberar el espacio que ocupaba antes de ser modificado.
 
@@ -45,9 +43,7 @@ Vista la teoría básica veamos unos ejemplos.
 }
 ```
 
-<div class="img-entrada">
-  <img class="img-entrada" src="/img/css/css-position-two.png">
-</div>
+![Ejemplo de position relative](../../assets/img/css/css-position-two.png)
 
 **Absolute**: realizamos la mismo que en el ejemplo anterior pero con la posición absolute, como puedes ver el movimiento del cuadrado azul ahora es respecto de la esquina izquierda superior del contenedor de los cuadrados y deja su espacio libre para que sea ocupado por el cuadrado verde.
 
@@ -59,9 +55,7 @@ Vista la teoría básica veamos unos ejemplos.
 }
 ```
 
-<div class="img-entrada">
-  <img class="img-entrada" src="/img/css/css-position-tree.png">
-</div>
+![Ejemplo de position absolute](../../assets/img/css/css-position-tree.png)
 
 **Fixed**: como hemos dicho esto sitúa el elemento respecto al viewport con el código css de mas abajo lo dejarías fijo en la esquina inferior derecha, como un botón flotante, te recomiendo que realices el ejemplo para ver el resultado.
 

@@ -45,8 +45,10 @@ Revisión completa del repo (2026-07-15). Orden de ejecución por prioridad.
 - [x] Husky: no estaba ni trackeado ni en `package.json` (solo scaffolding local en `.husky/_`) — borrado el directorio local. Si algún día se quiere pre-commit, instalar husky de cero.
 - [x] Actualizado `CLAUDE.md` (comandos, stack sin React, helper de posts, tema/cookies, Vercel).
 
-## 7. Imágenes y detalles finales
-- [ ] Migrar imágenes de posts a `src/assets/` + `astro:assets` (`<Image>`): optimización, `width/height` (evita CLS), `loading="lazy"`.
-- [ ] Borrar componentes muertos: `src/components/BlogPost.astro`, `Search.astro`, `TableOfContents.astro` (o implementarlos).
-- [ ] Verificar enlaces placeholder del footer de post (`https://twitter.com`, `contact@irvb.dev`).
-- [ ] Tiempo de lectura: excluir bloques de código del conteo de palabras.
+## 7. Imágenes y detalles finales ✅
+- [x] Imágenes del body migradas de `public/img/` a `src/assets/img/` con rutas relativas en los markdown (Astro las optimiza: WebP + `width/height` + `loading="lazy"`). Los `<img>` HTML de css_position.md convertidos a sintaxis markdown. Borrado `pago-seguro-amazon-1.webp` (huérfano).
+- [x] Hero de post con `<Image>` de `astro:assets` + `inferSize`: las URLs remotas del frontmatter se descargan y optimizan en build (`image.remotePatterns` https en config), con `srcset` 640/960/1280, `width/height` y `fetchpriority="high"`. Requirió `sharp` (autorizado vía `pnpm.onlyBuiltDependencies`).
+- [x] Borrados componentes muertos: `BlogPost`, `Search`, `TableOfContents`, `Card`, `Social`, `NewsletterCTA` y `svg/menu.astro`.
+- [x] Footer de post: eliminado el enlace placeholder a `https://twitter.com` (apuntaba a la home genérica); queda el contacto por email. **Pendiente del autor:** re-añadir enlace social con el perfil real si se quiere.
+- [x] Tiempo de lectura: excluidos los bloques de código del conteo (mínimo 1 min).
+- [x] Actualizadas las secciones afectadas de `CLAUDE.md`.

@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import { getPublishedPosts } from "../../utils/posts";
 
@@ -14,9 +15,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
-// Calcular tiempo de lectura (aprox 200 palabras por minuto)
-const wordCount = (entry.body ?? "").split(/\s+/).length;
-const readingTime = Math.ceil(wordCount / 200);
+// Calcular tiempo de lectura (aprox 200 palabras por minuto),
+// excluyendo los bloques de código para no inflar el conteo
+const proseOnly = (entry.body ?? "").replace(/```[\s\S]*?```/g, "");
+const wordCount = proseOnly.trim().split(/\s+/).filter(Boolean).length;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 ---
 
 <Layout
@@ -55,7 +58,16 @@ const readingTime = Math.ceil(wordCount / 200);
     </header>
 
     <div class="post-image-wrapper">
-      <img src={entry.data.image.url} alt={entry.data.image.alt} class="post-hero-image" />
+      <Image
+        src={entry.data.image.url}
+        alt={entry.data.image.alt}
+        inferSize
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 48rem) 100vw, 48rem"
+        class="post-hero-image"
+        loading="eager"
+        fetchpriority="high"
+      />
     </div>
 
     <div class="post-content">
@@ -65,9 +77,8 @@ const readingTime = Math.ceil(wordCount / 200);
     <footer class="post-footer">
       <hr />
       <p class="post-footer-text">
-        ¿Te gustó este artículo? Comparte tus pensamientos en{" "}
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a> o{" "}
-        <a href="mailto:contact@irvb.dev">contáctame por email</a>.
+        ¿Te gustó este artículo?{" "}
+        <a href="mailto:contact@irvb.dev">Contáctame por email</a>.
       </p>
       <a href="/blog" class="back-link">&larr; Volver a artículos</a>
     </footer>

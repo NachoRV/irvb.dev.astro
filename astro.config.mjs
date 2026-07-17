@@ -8,6 +8,11 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://irvb.dev/",
   integrations: [sitemap()],
+  image: {
+    // Los heros de los posts son URLs remotas (Unsplash, etc.); esto permite
+    // que astro:assets las descargue y optimice en build.
+    remotePatterns: [{ protocol: "https" }],
+  },
   // output: "server",
   // adapter: cloudflare(),
   vite: {

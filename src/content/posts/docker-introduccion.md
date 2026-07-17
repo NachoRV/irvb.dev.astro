@@ -28,7 +28,7 @@ aislar espacios de nombres y usuarios, o compartir recursos de computación.
 
 ## ¿Qué es Docker?
 
-![Logo Docker](/img/docker/docker.png)
+![Logo Docker](../../assets/img/docker/docker.png)
 
 Docker nace para hacer de la containerización algo sencillo, al alcance de todos. Es decir, Docker toma todos los conceptos existentes de containerización,
 y alguna de las librerías y herramientas existentes, para crear una plataforma nueva con un foco en la experiencia de desarrollo y operación.
@@ -120,7 +120,7 @@ Las máquinas virtuales son rápidas de iniciar, pero los contenedores lo son au
 
 Gráficamente, podemos verlo en el siguiente diagrama:
 
-![Comparación entre máquinas virtuales y contenedores](/img/docker/comp-vm-cont.png)
+![Comparación entre máquinas virtuales y contenedores](../../assets/img/docker/comp-vm-cont.png)
 
 Ambos enfoques además pueden convivir, y dentro de un mismo host físico que lo soporta, se pueden desplegar máquinas virtuales y contenedores simultáneamente, consiguiendo en una sola plataforma lo mejor de ambos mundos.
 
