@@ -25,7 +25,10 @@ const { tag } = Astro.params;
 const { posts, allTags } = Astro.props;
 ---
 
-<BaseLayout title={`${tag} - irvb.dev`}>
+<BaseLayout
+  title={`${tag} - irvb.dev`}
+  description={`Artículos etiquetados con ${tag} en irvb.dev.`}
+>
   <main>
     <div class="page-container">
       <header class="page-header">

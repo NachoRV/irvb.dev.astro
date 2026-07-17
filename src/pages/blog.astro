@@ -10,7 +10,10 @@ const allPosts = await getPublishedPosts();
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 ---
 
-<BaseLayout title={pageTitle}>
+<BaseLayout
+  title={pageTitle}
+  description="Artículos sobre desarrollo web, programación y tecnología."
+>
   <main>
     <div class="page-container">
       <header class="page-header">

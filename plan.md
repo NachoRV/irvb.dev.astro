@@ -28,12 +28,12 @@ Revisión completa del repo (2026-07-15). Orden de ejecución por prioridad.
 - [x] Quitadas dependencias `react`, `react-dom`, `@astrojs/react`, `@types/react`, `@types/react-dom`; limpiados `astro.config.mjs` (integración react) y `tsconfig.json` (opciones jsx). Resultado: `dist/_astro` sin ningún bundle JS.
 - [x] `aria-expanded` + `aria-controls` en el botón del menú móvil.
 
-## 5. SEO: sitemap + RSS + meta por página
-- [ ] `pnpm astro add sitemap` (`@astrojs/sitemap`).
-- [ ] `@astrojs/rss` con endpoint `src/pages/rss.xml.ts`.
-- [ ] `public/robots.txt` apuntando al sitemap.
-- [ ] `Layout.astro`: aceptar prop `description` (con fallback), canonical URL, Open Graph (`og:title`, `og:description`, `og:image`, `og:type`) y Twitter cards. Pasar la description del frontmatter desde las páginas de post.
-- [ ] Arreglar favicon: `type="image/svg+xml"` apunta a `/favicon.ico`; usar `favicon.svg`.
+## 5. SEO: sitemap + RSS + meta por página ✅
+- [x] `@astrojs/sitemap` añadido a `astro.config.mjs` — genera `sitemap-index.xml` en el build.
+- [x] `@astrojs/rss` con endpoint `src/pages/rss.xml.ts` (usa `getPublishedPosts()`, `<language>es</language>`), más `<link rel="alternate">` en el head.
+- [x] `public/robots.txt` apuntando al sitemap.
+- [x] `Layout.astro`: props `description` (con fallback), `image` y `type`; canonical URL, Open Graph completo (`og:site_name`, `og:locale es_ES`) y Twitter cards. Los posts pasan description/imagen del frontmatter y `type="article"`; blog y tags pasan descriptions propias.
+- [x] Favicon corregido: `favicon.svg` como icono SVG + `favicon.ico` de fallback.
 
 ## 6. Seguridad / housekeeping
 - [ ] Headers de seguridad (`X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, CSP básica) — el hosting es **Vercel**, así que van en `vercel.json` (no `public/_headers`).

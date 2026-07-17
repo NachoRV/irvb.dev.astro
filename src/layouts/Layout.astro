@@ -5,9 +5,20 @@ import Footer from "../components/Footer.astro";
 import Cookies from "../components/Cookies.astro";
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = "Blog personal sobre desarrollo web y tecnología",
+  image,
+  type = "website",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ? new URL(image, Astro.site) : undefined;
 
 const navItems = [
   {
@@ -29,14 +40,35 @@ const navItems = [
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Blog personal sobre desarrollo web y tecnología"
-    />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="irvb.dev"
+      href={new URL("rss.xml", Astro.site)}
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="irvb.dev" />
+    <meta property="og:locale" content="es_ES" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta
+      name="twitter:card"
+      content={ogImage ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
     <!-- Aplica el tema antes del primer paint para evitar el flash de tema claro -->
     <script is:inline>
       (() => {
